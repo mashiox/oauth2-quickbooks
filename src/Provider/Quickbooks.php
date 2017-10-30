@@ -4,23 +4,23 @@ namespace League\OAuth2\Client\Provider;
 
 // use League\OAuth2\Client\Provider\Exception\QuickbooksIdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
-// use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 class Quickbooks extends AbstractProvider
 {
-    use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
+    use \League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 
     /**
      * @var string Key used in a token response to identify the resource owner.
      */
-    const ACCESS_TOKEN_RESOURCE_OWNER_ID = null;
+    // const ACCESS_TOKEN_RESOURCE_OWNER_ID = null;
 
     /**
      * Default scopes
      *
      * @var array
      */
-    public $defaultScopes = ['com.intuit.quickbooks.accounting', 'com.intuit.quickbooks.payment']; // Optional extras: 'openid', 'profile', 'email', 'phone', 'address'
+    public $defaultScopes = ['com.intuit.quickbooks.accounting', 'com.intuit.quickbooks.payment', 'openid', 'profile', 'email', 'phone', 'address'];
 
     /**
      * Default host
@@ -69,6 +69,18 @@ class Quickbooks extends AbstractProvider
     public function getBaseAccessTokenUrl(array $params)
     {
         return 'https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer';
+    }
+
+    /**
+     * Get provider url to fetch user details
+     *
+     * @param  AccessToken $token
+     *
+     * @return string
+     */
+    public function getResourceOwnerDetailsUrl(AccessToken $token)
+    {
+        return 'https://sandbox-accounts.platform.intuit.com/v1/openid_connect/userinfo';
     }
 
     /**
@@ -148,5 +160,17 @@ class Quickbooks extends AbstractProvider
         $this->host = $host;
 
         return $this;
+    }
+
+    /**
+     * Generate a user object from a successful user details request.
+     *
+     * @param array $response
+     * @param AccessToken $token
+     * @return League\OAuth2\Client\Provider\ResourceOwnerInterface
+     */
+    protected function createResourceOwner(array $response, AccessToken $token)
+    {
+        return new QuickbooksResourceOwner($response);
     }
 }
