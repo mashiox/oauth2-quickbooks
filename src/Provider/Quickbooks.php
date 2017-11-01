@@ -20,7 +20,7 @@ class Quickbooks extends AbstractProvider
      *
      * @var array
      */
-    public $defaultScopes = ['com.intuit.quickbooks.accounting', 'com.intuit.quickbooks.payment', 'openid', 'profile', 'email', 'phone', 'address'];
+    public $defaultScopes = ['com.intuit.quickbooks.accounting', 'openid', 'profile', 'email', 'phone', 'address'];
 
     /**
      * Default host
