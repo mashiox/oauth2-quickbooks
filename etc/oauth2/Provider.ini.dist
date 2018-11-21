@@ -1,0 +1,7 @@
+
+[ServiceName]
+    base_uri = ""
+    client_id = ""
+    client_secret = ""
+    mode = ""
+    store = ""

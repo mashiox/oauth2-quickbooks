@@ -1,0 +1,10 @@
+version: '3.2'
+services:
+  development:
+    image: mashiox/oauth2-quickbooks
+    environment:
+      - ENV_ROOT=/opt/oauth2-quickbooks
+      - OAUTH2_PROVIDER_CONFIG=${ENV_ROOT}/etc/oauth2
+    volumes:
+      - "./src:/opt/oauth2-quickbooks/src"
+      - "./composer.json:/opt/oauth2-quickbooks/composer.json"

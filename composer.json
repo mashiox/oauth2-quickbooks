@@ -1,0 +1,19 @@
+{
+    "name": "mashiox/oauth2-quickbooks",
+    "description": "Quickbooks OAuth2 Client",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthew Walther",
+            "email": "matt@mashio.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "mashiox\\OAuth2\\": "src/"
+        }
+    },
+    "require": {
+        "league/oauth2-client": "^2.3"
+    }
+}
